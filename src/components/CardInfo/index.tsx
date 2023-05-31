@@ -8,7 +8,7 @@ type Props = {
 export const CardInfo = ({ label }: Props) => {
   return (
     <StyledCard>
-      <Text>{label}</Text>
+      <Text color="background">{label}</Text>
       <Input />
     </StyledCard>
   )

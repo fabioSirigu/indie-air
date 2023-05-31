@@ -6,11 +6,9 @@ export const StyledBody = styled.div`
 `
 
 export const StyledMain = styled.main`
-  border-top-left-radius: ${({ theme }) => theme.radii[3]}rem;
-  padding-bottom: 2rem;
   width: 100%;
   height: 100%;
   flex: 1;
-  overflow-x: hidden;
+  overflow: hidden;
   background: ${({ theme }) => theme.colors.background};
 `

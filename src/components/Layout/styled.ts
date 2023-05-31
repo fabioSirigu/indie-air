@@ -1,14 +1,6 @@
 import styled from 'styled-components'
 
-export const StyledRightContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  width: calc(100% - 250px);
-`
-
 export const StyledBody = styled.div`
-  display: flex;
   height: 100vh;
   overflow: hidden;
 `

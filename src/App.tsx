@@ -1,11 +1,17 @@
 import React from 'react'
-import { Header } from './components/Header'
+import { Routes, Route } from 'react-router-dom'
+import { Layout } from './components/Layout'
+import { Home } from './pages/Home'
+import { NotFound } from './pages/NotFound'
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+      </Route>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   )
 }
 

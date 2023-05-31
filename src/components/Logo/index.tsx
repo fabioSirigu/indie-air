@@ -1,3 +1,10 @@
+import { Image } from '../Image'
+import { StyledLogo } from './styled'
+
 export const Logo = () => {
-  return <div>logo</div>
+  return (
+    <StyledLogo>
+      <Image url="/images/logo_ind.svg" />
+    </StyledLogo>
+  )
 }

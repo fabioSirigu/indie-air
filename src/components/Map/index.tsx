@@ -31,16 +31,16 @@ export const MyMap = () => {
       <Map
         mapboxAccessToken="pk.eyJ1IjoiZmFsY28xMCIsImEiOiJjbGlicmsyY3MwNGhrM2lwNnBwYXFja25yIn0.h84EOmlAodF3KTVmein4qQ"
         initialViewState={{
-          latitude: 40,
-          longitude: -100,
-          zoom: 3.5,
+          latitude: 39.22245441479327,
+          longitude: 9.116767711363078,
+          zoom: 5,
           bearing: 0,
           pitch: 0
         }}
         style={{
           width: '100%'
         }}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
+        mapStyle="mapbox://styles/mapbox/streets-v11"
       >
         {pins}
       </Map>

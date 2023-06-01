@@ -1,3 +1,4 @@
+import { Button } from 'antd'
 import styled from 'styled-components'
 import { ThemeColor, ThemeSize, ThemeSpacing } from '../../style/theme'
 
@@ -6,9 +7,13 @@ export type ButtonStyleProps = {
   fontSize?: ThemeSize
   radius?: number
   padding?: ThemeSpacing
+  color?: ThemeColor
 }
 
-export const StyledButton = styled.button<ButtonStyleProps>`
+export const StyledButton = styled(Button)<ButtonStyleProps>`
+  color: ${({ theme, color }) => (color ? theme.colors[color] : theme.colors.text)};
+  height: 40px;
+  width: 120px;
   display: flex;
   justify-content: center;
   align-items: center;

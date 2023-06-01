@@ -1,3 +1,4 @@
+import { Button } from '../Button/Button'
 import { CardInfo } from '../CardInfo'
 import { Date } from '../DateCard'
 import { Logo } from '../Logo'
@@ -12,6 +13,7 @@ export const FilterRow = () => {
         <CardInfo label={item.label} />
       ))}
       <Date />
+      <Button title="Cerca" background="primary" />
     </StyledFilter>
   )
 }

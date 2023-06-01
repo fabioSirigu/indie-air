@@ -1,4 +1,6 @@
 import React from 'react'
+import './index.css'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'

@@ -1,12 +1,11 @@
-import { log } from 'console'
 import { useDispatch, useSelector } from 'react-redux'
 import { searchActions } from '../../features/search/reducer'
 import { selectArrival, selectDeparture } from '../../features/search/selectors'
-import { Button } from '../Button/Button'
+import { Button } from '../Button'
 import { CardInfo } from '../CardInfo'
 import { Date } from '../DateCard'
-import { Input } from '../Input'
 import { Logo } from '../Logo'
+import { Select } from '../Select'
 import { StyledFilter } from './styled'
 
 export const FilterRow = () => {
@@ -18,16 +17,17 @@ export const FilterRow = () => {
     <StyledFilter>
       <Logo />
       <CardInfo
-        label={'da'}
+        label={'Aereporto di Partenza'}
         value={departureAirport?.name ?? ''}
         onChange={() => dispatch(searchActions.removeDepartureValue())}
       />
       <CardInfo
-        label={'a'}
+        label={'Aereporto di Arrivo'}
         value={arrivalAirport?.name ?? ''}
         onChange={() => dispatch(searchActions.removeArrivalValue())}
       />
       <Date />
+      <Select />
       <Button title="Cerca" background="primary" />
     </StyledFilter>
   )

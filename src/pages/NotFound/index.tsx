@@ -1,7 +1,7 @@
 import { Empty } from 'antd'
 import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button } from '../../components/Button/Button'
+import { Button } from '../../components/Button'
 import { StyledEmptyPage } from './styled'
 
 export const NotFound = () => {

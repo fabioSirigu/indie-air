@@ -1,4 +1,4 @@
-import { Button as AntButton, ButtonProps } from 'antd'
+import { ButtonProps } from 'antd'
 import React from 'react'
 import { ButtonStyleProps, StyledButton } from './styled'
 

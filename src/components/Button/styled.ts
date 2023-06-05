@@ -12,7 +12,7 @@ export type ButtonStyleProps = {
 
 export const StyledButton = styled(Button)<ButtonStyleProps>`
   color: ${({ theme, color }) => (color ? theme.colors[color] : theme.colors.text)};
-  height: 40px;
+  height: 2rem;
   width: 120px;
   display: flex;
   justify-content: center;

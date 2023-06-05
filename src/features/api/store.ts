@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
+import searchReducer from '../search/reducer'
 import { serviceApi } from './serviceApi'
 
 const rootReducer = {
+  search: searchReducer,
   [serviceApi.reducerPath]: serviceApi.reducer
 }
 

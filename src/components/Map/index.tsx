@@ -1,9 +1,10 @@
 import { useCallback, useMemo, useState } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl'
+import { useDispatch } from 'react-redux'
 import { useGetAirportsQuery } from '../../features/api/endpoints/airportsEndpoints'
 import { AirportDto } from '../../features/api/endpoints/types'
+import { searchActions } from '../../features/search/reducer'
 import { Loader } from '../Loader'
-import Pin from '../MarkerPin'
 import { Text } from '../Text'
 import { StyledMap } from './styled'
 
@@ -16,6 +17,7 @@ type City = {
   country_code: string
 }
 export const MyMap = () => {
+  const dispatch = useDispatch()
   const [popupInfo, setPopupInfo] = useState<City>()
   const { data: airports, isLoading } = useGetAirportsQuery()
 
@@ -25,14 +27,25 @@ export const MyMap = () => {
     (e: any, airport: AirportDto) => {
       e?.originalEvent?.stopPropagation()
       setPopupInfo(airport)
+      dispatch(
+        searchActions.setAirport({
+          name: airport.name,
+          iataCode: airport.iata_code
+        })
+      )
     },
-    [setPopupInfo]
+    [setPopupInfo, dispatch]
   )
 
   const pins = useMemo(
     () =>
       filteredAirports?.map((city, index) => (
-        <Marker key={`marker-${index}`} longitude={city.lng} latitude={city.lat}>
+        <Marker
+          key={`marker-${index}`}
+          longitude={city.lng}
+          latitude={city.lat}
+          onClick={(e) => handleOpenPopUp(e, city)}
+        >
           <img
             onMouseEnter={() => setPopupInfo(city)}
             onMouseLeave={() => setPopupInfo(undefined)}
@@ -71,7 +84,6 @@ export const MyMap = () => {
             anchor="top"
             longitude={Number(popupInfo.lng)}
             latitude={Number(popupInfo.lat)}
-            onClose={() => setPopupInfo(undefined)}
             closeButton={false}
           >
             <div

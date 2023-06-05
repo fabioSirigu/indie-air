@@ -6,3 +6,5 @@ export type AirportDto = {
   lng: number
   country_code: string
 }
+
+export type AnyCallbackFunction = (...args: any[]) => any

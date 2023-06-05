@@ -1,7 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl'
-import CITIES from '../../data/cities.json'
+import { useGetAirportsQuery } from '../../features/api/endpoints/airportsEndpoints'
+import { AirportDto } from '../../features/api/endpoints/types'
+import { Loader } from '../Loader'
 import Pin from '../MarkerPin'
+import { Text } from '../Text'
 import { StyledMap } from './styled'
 
 type City = {
@@ -13,27 +16,38 @@ type City = {
   country_code: string
 }
 export const MyMap = () => {
-  const [popupInfo, setPopupInfo] = useState(null)
+  const [popupInfo, setPopupInfo] = useState<City>()
+  const { data: airports, isLoading } = useGetAirportsQuery()
+
+  const filteredAirports = airports?.filter((item) => item.iata_code)
+
+  const handleOpenPopUp = useCallback(
+    (e: any, airport: AirportDto) => {
+      e?.originalEvent?.stopPropagation()
+      setPopupInfo(airport)
+    },
+    [setPopupInfo]
+  )
 
   const pins = useMemo(
     () =>
-      CITIES.map((city, index) => (
-        <Marker
-          key={`marker-${index}`}
-          longitude={city.lng}
-          latitude={city.lat}
-          /* onClick={(e) => {
-            // If we let the click event propagates to the map, it will immediately close the popup
-            // with `closeOnClick: true`
-            e.originalEvent.stopPropagation()
-            setPopupInfo()
-          }} */
-        >
-          <Pin />
+      filteredAirports?.map((city, index) => (
+        <Marker key={`marker-${index}`} longitude={city.lng} latitude={city.lat}>
+          <img
+            onMouseEnter={() => setPopupInfo(city)}
+            onMouseLeave={() => setPopupInfo(undefined)}
+            src="https://cdn-icons-png.flaticon.com/512/7720/7720736.png"
+            style={{
+              width: '35px',
+              height: '35px'
+            }}
+            alt="marker icon"
+          />
         </Marker>
       )),
-    []
+    [filteredAirports, handleOpenPopUp]
   )
+  if (isLoading) return <Loader />
   return (
     <StyledMap>
       <Map
@@ -48,22 +62,31 @@ export const MyMap = () => {
         style={{
           width: '100%'
         }}
-        mapStyle="mapbox://styles/mapbox/streets-v11"
+        mapStyle="mapbox://styles/mapbox/streets-v12"
       >
         {pins}
 
-        {/* {popupInfo && (
+        {popupInfo && (
           <Popup
             anchor="top"
-            longitude={Number(popupInfo)}
-            latitude={Number(popupInfo)}
-            onClose={() => setPopupInfo(null)}
+            longitude={Number(popupInfo.lng)}
+            latitude={Number(popupInfo.lat)}
+            onClose={() => setPopupInfo(undefined)}
+            closeButton={false}
           >
-            <div>
-              {popupInfo}, {popupInfo} |{' '}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                flexWrap: 'wrap',
+                borderRadius: '1rem'
+              }}
+            >
+              <Text color="primary">{popupInfo.name}</Text>
+              <Text color="primary">{popupInfo.iata_code}</Text>
             </div>
           </Popup>
-        )} */}
+        )}
       </Map>
     </StyledMap>
   )

@@ -1,16 +1,18 @@
-import { AirportDto } from '../../components/api/types'
 import { useGetAirportsQuery } from '../../features/api/endpoints/airportsEndpoints'
+import { AirportDto } from '../../features/api/endpoints/types'
+import { StyledCard } from './styled'
 
 export const Airports = () => {
   const { data: airports, isLoading } = useGetAirportsQuery()
+  const filteredAirports = airports!.filter((item) => item.iata_code)
   if (isLoading) return <div>Loading..</div>
   return (
-    <div>
+    <StyledCard>
       <ul>
-        {airports?.map((airport: AirportDto) => (
-          <li>{airport.name}</li>
+        {filteredAirports.map((airport: AirportDto) => (
+          <li key={airport.name}>{airport.name}</li>
         ))}
       </ul>
-    </div>
+    </StyledCard>
   )
 }

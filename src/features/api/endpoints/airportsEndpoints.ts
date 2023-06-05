@@ -1,5 +1,5 @@
-import { AirportDto } from '../../../components/api/types'
 import { serviceApi } from '../serviceApi'
+import { AirportDto } from './types'
 
 export const airportsApi = serviceApi.injectEndpoints({
   endpoints: (builder) => ({

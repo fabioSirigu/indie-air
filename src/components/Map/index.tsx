@@ -1,9 +1,17 @@
 import { useMemo, useState } from 'react'
-import Map, { Marker } from 'react-map-gl'
+import Map, { Marker, Popup } from 'react-map-gl'
 import CITIES from '../../data/cities.json'
 import Pin from '../MarkerPin'
 import { StyledMap } from './styled'
 
+type City = {
+  name: string
+  iata_code: string
+  icao_code: string
+  lat: number
+  lng: number
+  country_code: string
+}
 export const MyMap = () => {
   const [popupInfo, setPopupInfo] = useState(null)
 
@@ -12,13 +20,13 @@ export const MyMap = () => {
       CITIES.map((city, index) => (
         <Marker
           key={`marker-${index}`}
-          longitude={city.longitude}
-          latitude={city.latitude}
+          longitude={city.lng}
+          latitude={city.lat}
           /* onClick={(e) => {
             // If we let the click event propagates to the map, it will immediately close the popup
             // with `closeOnClick: true`
             e.originalEvent.stopPropagation()
-            setPopupInfo(city)
+            setPopupInfo()
           }} */
         >
           <Pin />
@@ -43,6 +51,19 @@ export const MyMap = () => {
         mapStyle="mapbox://styles/mapbox/streets-v11"
       >
         {pins}
+
+        {/* {popupInfo && (
+          <Popup
+            anchor="top"
+            longitude={Number(popupInfo)}
+            latitude={Number(popupInfo)}
+            onClose={() => setPopupInfo(null)}
+          >
+            <div>
+              {popupInfo}, {popupInfo} |{' '}
+            </div>
+          </Popup>
+        )} */}
       </Map>
     </StyledMap>
   )

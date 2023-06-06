@@ -11,3 +11,5 @@ export const selectArrival = createSelector(
   selectState,
   (flights) => flights.arrivalAirport
 )
+
+export const selectFlights = createSelector(selectState, (flight) => flight.flightOffer)

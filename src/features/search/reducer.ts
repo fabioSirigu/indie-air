@@ -3,7 +3,8 @@ import { SearchState } from './model'
 
 const initialState: SearchState = {
   departureAirport: null,
-  arrivalAirport: null
+  arrivalAirport: null,
+  flightOffer: null
 }
 
 const searchSlice = createSlice({
@@ -23,6 +24,17 @@ const searchSlice = createSlice({
     },
     removeArrivalValue: (state) => {
       state.arrivalAirport = null
+    },
+    addToFlightOffer: (
+      state,
+      {
+        payload
+      }: PayloadAction<{
+        iataCode: [string]
+        dates: [string]
+      }>
+    ) => {
+      state.flightOffer = payload
     }
   }
 })

@@ -1,9 +1,10 @@
 import { useCallback, useMemo, useState } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useGetAirportsQuery } from '../../features/api/endpoints/airportsEndpoints'
 import { AirportDto } from '../../features/api/endpoints/types'
 import { searchActions } from '../../features/search/reducer'
+import { selectDeparture } from '../../features/search/selectors'
 import { Loader } from '../Loader'
 import { Text } from '../Text'
 import { StyledMap } from './styled'
@@ -18,6 +19,7 @@ type City = {
 }
 export const MyMap = () => {
   const dispatch = useDispatch()
+
   const [popupInfo, setPopupInfo] = useState<City>()
   const { data: airports, isLoading } = useGetAirportsQuery()
 

@@ -1,10 +1,9 @@
 import { useCallback, useMemo, useState } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useGetAirportsQuery } from '../../features/api/endpoints/airportsEndpoints'
-import { AirportDto } from '../../features/api/endpoints/types'
+import { Airport } from '../../features/api/endpoints/types'
 import { searchActions } from '../../features/search/reducer'
-import { selectDeparture } from '../../features/search/selectors'
 import { Loader } from '../Loader'
 import { Text } from '../Text'
 import { StyledMap } from './styled'
@@ -26,14 +25,11 @@ export const MyMap = () => {
   const filteredAirports = airports?.filter((item) => item.iata_code)
 
   const handleOpenPopUp = useCallback(
-    (e: any, airport: AirportDto) => {
+    (e: any, airport: Airport) => {
       e?.originalEvent?.stopPropagation()
       setPopupInfo(airport)
       dispatch(
-        searchActions.setAirport({
-          name: airport.name,
-          iataCode: airport.iata_code
-        })
+        searchActions.updateAirport({ name: airport.name, iataCode: airport.iata_code })
       )
     },
     [setPopupInfo, dispatch]

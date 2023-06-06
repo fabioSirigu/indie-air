@@ -1,9 +1,9 @@
 import { serviceApi } from '../serviceApi'
-import { AirportDto } from './types'
+import { Airport } from './types'
 
 export const airportsApi = serviceApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAirports: builder.query<AirportDto[], void>({
+    getAirports: builder.query<Airport[], void>({
       query: () => 'airports'
     })
   })

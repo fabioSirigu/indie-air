@@ -1,5 +1,5 @@
 import { useGetAirportsQuery } from '../../features/api/endpoints/airportsEndpoints'
-import { AirportDto } from '../../features/api/endpoints/types'
+import { Airport } from '../../features/api/endpoints/types'
 import { StyledCard } from './styled'
 
 export const Airports = () => {
@@ -9,7 +9,7 @@ export const Airports = () => {
   return (
     <StyledCard>
       <ul>
-        {filteredAirports.map((airport: AirportDto) => (
+        {filteredAirports.map((airport: Airport) => (
           <li key={airport.name}>{airport.name}</li>
         ))}
       </ul>

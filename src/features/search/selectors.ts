@@ -3,13 +3,14 @@ import { RootState } from '../api/store'
 
 export const selectState = (state: RootState) => state.search
 
-export const selectDeparture = createSelector(
+export const searchFlightsOptions = createSelector(
   selectState,
-  (flights) => flights.departureAirport
-)
-export const selectArrival = createSelector(
-  selectState,
-  (flights) => flights.arrivalAirport
+  (flights) => flights.searchFlightsOptions
 )
 
-export const selectFlights = createSelector(selectState, (flight) => flight.flightOffer)
+export const selectCanSearch = createSelector(searchFlightsOptions, (searchOptions) =>
+  Object.values(searchOptions).every((option) => {
+    if (Array.isArray(option)) return !!option.length
+    return !!option
+  })
+)

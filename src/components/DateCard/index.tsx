@@ -15,15 +15,20 @@ const now = dayjs()
 
 export const Date = () => {
   const dispatch = useDispatch()
-  const handleDate = useCallback((value: any) => {
-    return value.map((item: any) => item.format(dateFormat))
-  }, [])
+
+  const handleChange = useCallback(
+    (value: any) => {
+      const formattedDates = value.map((item: any) => item.format(dateFormat))
+      dispatch(searchActions.updateSearchParams({ key: 'dates', value: formattedDates }))
+    },
+    [dispatch]
+  )
   return (
     <StyledDateCard>
       <RangePicker
         defaultValue={[dayjs(now, dateFormat), dayjs(now, dateFormat)]}
         format={dateFormat}
-        onChange={(value) => dispatch(searchActions.addToFlightOffer(handleDate(value)))}
+        onChange={handleChange}
       />
     </StyledDateCard>
   )

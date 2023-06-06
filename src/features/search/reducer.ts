@@ -1,40 +1,50 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { SearchState } from './model'
+import { SearchType } from '../api/endpoints/types'
+import { SearchOption, SearchState } from './model'
 
 const initialState: SearchState = {
-  departureAirport: null,
-  arrivalAirport: null,
-  flightOffer: null
+  searchFlightsOptions: {
+    departureAirport: { name: '', iataCode: '' },
+    arrivalAirport: { name: '', iataCode: '' },
+    dates: [],
+    passengers: 1
+  }
 }
 
 const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    setAirport: (
+    updateAirport: (
       state,
       { payload }: PayloadAction<{ name: string; iataCode: string }>
     ) => {
-      state.departureAirport
-        ? (state.arrivalAirport = payload)
-        : (state.departureAirport = payload)
+      const key = state.searchFlightsOptions.departureAirport.iataCode
+        ? 'arrivalAirport'
+        : 'departureAirport'
+      state.searchFlightsOptions = {
+        ...state.searchFlightsOptions,
+        [key]: payload
+      }
     },
-    removeDepartureValue: (state) => {
-      state.departureAirport = null
-    },
-    removeArrivalValue: (state) => {
-      state.arrivalAirport = null
-    },
-    addToFlightOffer: (
+    updateSearchParams: (
       state,
-      {
-        payload
-      }: PayloadAction<{
-        iataCode: [string]
-        dates: [string]
-      }>
+      { payload }: PayloadAction<{ key: keyof SearchOption; value?: any }>
     ) => {
-      state.flightOffer = payload
+      const { key, value } = payload
+      state.searchFlightsOptions = {
+        ...state.searchFlightsOptions,
+        [key]: value ?? initialState.searchFlightsOptions[key]
+      }
+    },
+    resetAirport: (
+      state,
+      { payload }: PayloadAction<'departureAirport' | 'arrivalAirport'>
+    ) => {
+      state.searchFlightsOptions = {
+        ...state.searchFlightsOptions,
+        [payload]: initialState.searchFlightsOptions[payload]
+      }
     }
   }
 })

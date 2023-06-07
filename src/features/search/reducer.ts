@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { SearchType } from '../api/endpoints/types'
 import { SearchOption, SearchState } from './model'
 
 const initialState: SearchState = {
   searchFlightsOptions: {
     departureAirport: { name: '', iataCode: '' },
     arrivalAirport: { name: '', iataCode: '' },
-    dates: [],
+    departureDate: '',
+    arrivalDate: '',
     passengers: 1
   }
 }

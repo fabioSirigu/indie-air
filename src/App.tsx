@@ -9,11 +9,15 @@ import { NotFound } from './pages/NotFound'
 
 function App() {
   const [getToken, { data }] = useGetAuthTokenMutation()
-  console.log('🚀 ~ file: App.tsx:11 ~ App ~ data:', data)
 
   useEffect(() => {
     getToken()
+      .unwrap()
+      .then(({ access_token }) => {
+        localStorage.setItem('accessToken', access_token)
+      })
   }, [getToken])
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

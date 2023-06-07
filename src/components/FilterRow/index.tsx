@@ -14,7 +14,7 @@ export const FilterRow = () => {
   const dispatch = useDispatch()
 
   const searchParams = useSelector(searchFlightsOptions)
-  const { dates, arrivalAirport, departureAirport, passengers } = searchParams
+  const { departureDate, arrivalAirport, departureAirport, passengers } = searchParams
   const canUserSearch = useSelector(selectCanSearch)
   const [trigger, data] = useLazyGetFlightsQuery()
 

@@ -1,18 +1,18 @@
 import { SearchOption } from '../../search/model'
 import { fligthsApi } from '../flightsApi'
 
-const version = 'shopping/flight-offers/'
+const version = 'shopping/flight-offers'
 export const fligths = fligthsApi.injectEndpoints({
   endpoints: (builder) => ({
     getFlights: builder.query<any, SearchOption>({
       query: (params) => {
-        const bodyEncodedParams = new URLSearchParams({
-          originalLocationCode: `${params.departureAirport.iataCode}`,
+        const encodedParams = new URLSearchParams({
+          originLocationCode: `${params.departureAirport.iataCode}`,
           destinationLocationCode: `${params.arrivalAirport.iataCode}`,
-          departureDate: `${params.dates[0]}`,
+          departureDate: `${params.departureDate}`,
           adults: `${params.passengers}`
         })
-        return { url: `${version}`, body: bodyEncodedParams }
+        return { url: version, params: encodedParams }
       }
     })
   })

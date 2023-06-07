@@ -1,9 +1,6 @@
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  useGetFlightsQuery,
-  useLazyGetFlightsQuery
-} from '../../features/api/endpoints/flightsEndpoints'
+import { useLazyGetFlightsQuery } from '../../features/api/endpoints/flightsEndpoints'
 import { searchActions } from '../../features/search/reducer'
 import { searchFlightsOptions, selectCanSearch } from '../../features/search/selectors'
 import { Button } from '../Button'
@@ -36,14 +33,7 @@ export const FilterRow = () => {
       <CardInfo
         label={'Aereporto di Arrivo'}
         value={arrivalAirport.name}
-        onChange={() =>
-          dispatch(
-            searchActions.updateSearchParams({
-              key: 'arrivalAirport',
-              value: arrivalAirport.iataCode
-            })
-          )
-        }
+        onChange={() => dispatch(searchActions.resetAirport('arrivalAirport'))}
       />
       <Date />
       <InputNumber />

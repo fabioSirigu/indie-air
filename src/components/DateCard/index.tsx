@@ -18,18 +18,16 @@ export const Date = () => {
 
   const handleChange = useCallback(
     (value: any) => {
-      const formattedDates = value.map((item: any) => item.format(dateFormat))
+      const formattedDates = value
+        ? value.map((item: any) => item.format(dateFormat))
+        : null
       dispatch(searchActions.updateSearchParams({ key: 'dates', value: formattedDates }))
     },
     [dispatch]
   )
   return (
     <StyledDateCard>
-      <RangePicker
-        defaultValue={[dayjs(now, dateFormat), dayjs(now, dateFormat)]}
-        format={dateFormat}
-        onChange={handleChange}
-      />
+      <RangePicker format={dateFormat} onChange={handleChange} />
     </StyledDateCard>
   )
 }

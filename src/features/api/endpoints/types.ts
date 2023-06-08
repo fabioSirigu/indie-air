@@ -16,6 +16,18 @@ export type SearchType = {
 
 export type FlightsDto = {
   id: string
+  itineraries: ItinerariesType[]
+}
+
+export type ItinerariesType = {
+  duration: string
+  segments: SegmentsType[]
+}
+
+export type SegmentsType = {
+  arrival: { iataCode: string; at: string }
+  departure: { iataCode: string; at: string }
+  duration: string
 }
 
 export type AnyCallbackFunction = (...args: any[]) => any

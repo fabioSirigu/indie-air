@@ -1151,14 +1151,7 @@
             "lng": -3.78514,
             "country_code": "ES"
         },
-        {
-            "name": "Decimomannu Military Airfield",
-            "iata_code": "DCI",
-            "icao_code": "LIED",
-            "lat": 39.354198,
-            "lng": 8.97248,
-            "country_code": "IT"
-        },
+        
         {
             "name": "Dirección General de Tráfico Heliport",
             "icao_code": "LEDG",

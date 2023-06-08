@@ -13,10 +13,11 @@ const { RangePicker } = DatePicker
 const dateFormat = 'YYYY-MM-DD'
 
 type Props = {
-  onChange?: () => void
+  value?: string[] | ''
 }
-export const Date = ({ onChange }: Props) => {
+export const Date = () => {
   const dispatch = useDispatch()
+
   const handleChange = useCallback(
     (value: any) => {
       const formattedDates = value

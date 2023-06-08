@@ -1,20 +1,17 @@
 import { InputNumber as AntInputNumber } from 'antd'
-import { useDispatch } from 'react-redux'
-import { searchActions } from '../../features/search/reducer'
 
-export const InputNumber = () => {
-  const dispatch = useDispatch()
-
+type Props = {
+  onChange?: (value: number | null) => void
+  value?: number | null
+}
+export const InputNumber = ({ onChange, value }: Props) => {
   return (
     <AntInputNumber
+      value={value}
       min={1}
       max={8}
       defaultValue={1}
-      onChange={(value) =>
-        dispatch(
-          searchActions.updateSearchParams({ key: 'passengers', value: Number(value) })
-        )
-      }
+      onChange={(value) => onChange?.(value)}
     />
   )
 }

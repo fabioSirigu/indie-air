@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { useLazyGetFlightsQuery } from '../../features/api/endpoints/flightsEndpoints'
 import { searchActions } from '../../features/search/reducer'
 import { searchFlightsOptions, selectCanSearch } from '../../features/search/selectors'
@@ -12,6 +13,7 @@ import { StyledFilter } from './styled'
 
 export const FilterRow = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const searchParams = useSelector(searchFlightsOptions)
   const { departureDate, arrivalAirport, departureAirport, passengers } = searchParams
@@ -20,7 +22,8 @@ export const FilterRow = () => {
 
   const searchFlights = useCallback(() => {
     searchParams && trigger(searchParams)
-  }, [searchParams, trigger])
+    navigate('/flights')
+  }, [searchParams, trigger, navigate])
 
   return (
     <StyledFilter>
@@ -36,7 +39,17 @@ export const FilterRow = () => {
         onChange={() => dispatch(searchActions.resetAirport('arrivalAirport'))}
       />
       <Date />
-      <InputNumber />
+      <InputNumber
+        value={passengers}
+        onChange={(value) =>
+          dispatch(
+            searchActions.updateSearchParams({
+              key: 'passengers',
+              value: Number(value)
+            })
+          )
+        }
+      />
       <Button
         title="Cerca"
         background="primary"

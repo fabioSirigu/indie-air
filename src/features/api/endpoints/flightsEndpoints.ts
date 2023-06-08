@@ -10,10 +10,15 @@ export const fligths = fligthsApi.injectEndpoints({
           originLocationCode: `${params.departureAirport.iataCode}`,
           destinationLocationCode: `${params.arrivalAirport.iataCode}`,
           departureDate: `${params.departureDate}`,
-          adults: `${params.passengers}`
+          returnDate: `${params.returnDate}`,
+          adults: `${params.passengers}`,
+          max: `${10}`
         })
         return { url: version, params: encodedParams }
       }
+      /* transformResponse: (response: { data: any }) => {
+        return response.data
+      } */
     })
   })
 })

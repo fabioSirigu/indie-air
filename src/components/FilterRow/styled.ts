@@ -13,5 +13,9 @@ export const StyledFilter = styled.div`
   position: fixed;
   z-index: 999;
   top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
   height: 120px;
+  width: 80%;
+  box-shadow: 0px 0px 20px 1px #000000;
 `

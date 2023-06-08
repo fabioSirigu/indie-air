@@ -32,7 +32,7 @@ export const Date = ({ onChange }: Props) => {
       )
       dispatch(
         searchActions.updateSearchParams({
-          key: 'arrivalDate',
+          key: 'returnDate',
           value: formattedDates[1]
         })
       )

@@ -14,4 +14,8 @@ export type SearchType = {
   passengers: number
 }
 
+export type FlightsDto = {
+  id: string
+}
+
 export type AnyCallbackFunction = (...args: any[]) => any

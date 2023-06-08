@@ -6,7 +6,7 @@ const initialState: SearchState = {
     departureAirport: { name: '', iataCode: '' },
     arrivalAirport: { name: '', iataCode: '' },
     departureDate: '',
-    arrivalDate: '',
+    returnDate: '',
     passengers: 1
   }
 }

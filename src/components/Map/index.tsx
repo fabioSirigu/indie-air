@@ -1,9 +1,10 @@
-import { useCallback, useMemo, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl'
 import { useDispatch } from 'react-redux'
 import { useGetAirportsQuery } from '../../features/api/endpoints/airportsEndpoints'
 import { Airport } from '../../features/api/endpoints/types'
 import { searchActions } from '../../features/search/reducer'
+import { StyledLoader } from '../../style/global'
 import { Loader } from '../Loader'
 import { Text } from '../Text'
 import { StyledMap } from './styled'
@@ -16,11 +17,11 @@ type City = {
   lng: number
   country_code: string
 }
-export const MyMap = () => {
+export const MyMap = memo(() => {
   const dispatch = useDispatch()
 
   const [popupInfo, setPopupInfo] = useState<City>()
-  const { data: airports, isLoading } = useGetAirportsQuery()
+  const { data: airports, isLoading, fulfilledTimeStamp } = useGetAirportsQuery()
 
   const filteredAirports = airports?.filter((item) => item.iata_code)
 
@@ -34,7 +35,6 @@ export const MyMap = () => {
     },
     [setPopupInfo, dispatch]
   )
-
   const pins = useMemo(
     () =>
       filteredAirports?.map((city, index) => (
@@ -58,7 +58,7 @@ export const MyMap = () => {
       )),
     [filteredAirports, handleOpenPopUp]
   )
-  if (isLoading) return <Loader />
+  if (isLoading) return <StyledLoader />
   return (
     <StyledMap>
       <Map
@@ -66,7 +66,7 @@ export const MyMap = () => {
         initialViewState={{
           latitude: 39.22245441479327,
           longitude: 9.116767711363078,
-          zoom: 5,
+          zoom: 4.5,
           bearing: 0,
           pitch: 0
         }}
@@ -100,4 +100,4 @@ export const MyMap = () => {
       </Map>
     </StyledMap>
   )
-}
+})

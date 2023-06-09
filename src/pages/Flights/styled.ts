@@ -12,8 +12,8 @@ export const StyledCard = styled.div`
   padding: 0.75rem 1.25rem;
   width: 30%;
   border-radius: ${({ theme }) => theme.radii[2]}rem;
-  color: ${({ theme }) => theme.colors.text};
-  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.text};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,14 +35,6 @@ export const StyledFLightTrack = styled.div`
   display: flex;
   justify-content: space-between;
   column-gap: 1.5rem;
-`
-export const StyledButton = styled.span`
-  aspect-ratio: 1;
-  right: -60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
 `
 
 type PropsAccordion = {

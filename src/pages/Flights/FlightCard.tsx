@@ -8,7 +8,6 @@ import { ReturnFlight } from './ReturnFlight'
 import { Stopovers } from './Stopovers'
 import {
   StyledAccordion,
-  StyledButton,
   StyledCard,
   StyledItinerary,
   StyledWrapperStopovers

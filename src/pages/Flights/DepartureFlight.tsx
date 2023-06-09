@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { Text } from '../../components/Text'
 import { ItinerariesType } from '../../features/api/endpoints/types'
 import {
@@ -11,7 +11,7 @@ import {
 type Props = {
   departure: ItinerariesType
 }
-export const DepartureFlight = ({ departure }: Props) => {
+export const DepartureFlight = memo(({ departure }: Props) => {
   const setIndex = useMemo(() => {
     if (departure.segments.length < 2) return 0
     return departure.segments.length - 1
@@ -31,4 +31,4 @@ export const DepartureFlight = ({ departure }: Props) => {
       </StyledArrivalInfo>
     </StyledFLightTrack>
   )
-}
+})

@@ -3,7 +3,7 @@ import { Icon } from '../../components/Icon'
 import { Text } from '../../components/Text'
 import { ItinerariesType } from '../../features/api/endpoints/types'
 import { DepartureFlight } from './DepartureFlight'
-import { StyledWrapperStopovers, StyledButton } from './styled'
+import { StyledWrapperStopovers } from './styled'
 
 type Props = {
   departure: ItinerariesType
@@ -19,9 +19,8 @@ export const TypeOfFlight = ({ departure, returnFlight, expanded }: Props) => {
             Scali: {departure.segments.length - 1}
           </Text>
           <Icon iconName="arrival" color="dangerLight" />
-          <StyledButton>
-            <IconButton onClick={expanded} iconName="plus" />
-          </StyledButton>
+
+          <IconButton background="primary" onClick={expanded} iconName="plus" rounded />
         </>
       ) : (
         <>

@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { Text } from '../../components/Text'
 import { ItinerariesType } from '../../features/api/endpoints/types'
 import {
@@ -11,16 +12,23 @@ type Props = {
   departure: ItinerariesType
 }
 export const DepartureFlight = ({ departure }: Props) => {
+  const setIndex = useMemo(() => {
+    if (departure.segments.length < 2) return 0
+    return departure.segments.length - 1
+  }, [departure])
+
   return (
     <StyledFLightTrack>
-      <Text color="text" weight="bold">
-        Andata
+      <Text color="background" weight="mediumBold" variant="h4">
+        A.
       </Text>
       <StyledDepartureInfo>
         {departure.segments[0].departure.iataCode}
       </StyledDepartureInfo>
-      <StyledTimeInfo>Tempo di volo {departure.duration.slice(2)}</StyledTimeInfo>
-      <StyledArrivalInfo>{departure.segments[0].arrival.iataCode}</StyledArrivalInfo>
+      <StyledTimeInfo>{departure.duration.slice(2).toLowerCase()}</StyledTimeInfo>
+      <StyledArrivalInfo>
+        {departure.segments[setIndex].arrival.iataCode}
+      </StyledArrivalInfo>
     </StyledFLightTrack>
   )
 }

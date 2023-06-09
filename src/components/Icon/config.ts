@@ -17,7 +17,10 @@ import {
   faStar,
   faStarHalfStroke,
   faClose,
-  faFireFlameCurved
+  faFireFlameCurved,
+  faPlaneArrival,
+  faPlaneDeparture,
+  faPlane
 } from '@fortawesome/free-solid-svg-icons'
 
 export const icons = {
@@ -39,7 +42,10 @@ export const icons = {
   emptyStar: emptyStar,
   halfStar: faStarHalfStroke,
   close: faClose,
-  fire: faFireFlameCurved
+  fire: faFireFlameCurved,
+  departure: faPlaneDeparture,
+  arrival: faPlaneArrival,
+  plane: faPlane
 }
 
 export type NameIcon = keyof typeof icons

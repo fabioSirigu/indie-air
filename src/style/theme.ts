@@ -3,7 +3,10 @@ export const theme = {
     background: '#061F3D',
     primary: '#2762e3',
     text: '#F0F0F0',
-    textLight: '#82838C'
+    textLight: '#82838C',
+    danger: '#ff0000',
+    dangerLight: '#ff5252',
+    confirm: '#8fce00'
   },
   fontSizes: {
     xs: 0.4,

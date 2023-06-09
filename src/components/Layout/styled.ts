@@ -4,11 +4,14 @@ export const StyledBody = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
+  background-image: url('./images/marco-lopez-qK6HAkB91Yc-unsplash.jpg');
+  background-size: cover;
+  overflow: hidden;
 `
 
 export const StyledMain = styled.main`
   width: 100vw;
   height: 100vh;
   flex: 1;
-  background: ${({ theme }) => theme.colors.background};
+  overflow: scroll;
 `

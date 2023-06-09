@@ -1,22 +1,23 @@
-import { Collapse } from 'antd'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const StyledBody = styled.div`
-  margin: 1rem 0;
+  padding: 2rem 0;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.2rem;
 `
 
 export const StyledCard = styled.div`
-  padding: 0.5rem 0;
+  padding: 0.75rem 1.25rem;
+  width: 30%;
+  border-radius: ${({ theme }) => theme.radii[2]}rem;
   color: ${({ theme }) => theme.colors.text};
-  width: 80%;
   background: ${({ theme }) => theme.colors.primary};
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.5);
 `
 export const StyledItinerary = styled.div`
   display: flex;
@@ -35,15 +36,32 @@ export const StyledFLightTrack = styled.div`
   justify-content: space-between;
   column-gap: 1.5rem;
 `
-
-export const StyledAccordion = styled.div`
-  width: 50px;
+export const StyledButton = styled.span`
   aspect-ratio: 1;
-  position: absolute;
-  border-radius: 50%;
   right: -60px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+`
+
+type PropsAccordion = {
+  extended: boolean
+}
+export const StyledAccordion = styled.div<PropsAccordion>`
+  ${({ extended }) =>
+    extended
+      ? css`
+          display: block;
+        `
+      : css`
+          display: none;
+        `}
+`
+
+export const StyledWrapperStopovers = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.75rem;
 `

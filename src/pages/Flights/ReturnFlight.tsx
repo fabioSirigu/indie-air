@@ -19,7 +19,7 @@ export const ReturnFlight = ({ returnFlight }: Props) => {
   return (
     <StyledFLightTrack>
       <Text color="background" weight="mediumBold" variant="h4">
-        R.
+        Ritorno
       </Text>
       <StyledDepartureInfo>
         {returnFlight.segments[0].departure.iataCode}

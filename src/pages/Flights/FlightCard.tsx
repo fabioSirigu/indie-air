@@ -1,17 +1,9 @@
-import { set } from 'immer/dist/internal'
 import { useCallback, useState } from 'react'
-import { IconButton } from '../../components/Button/IconButton'
-import { Text } from '../../components/Text'
 import { ItinerariesType } from '../../features/api/endpoints/types'
 import { DepartureFlight } from './DepartureFlight'
 import { ReturnFlight } from './ReturnFlight'
 import { Stopovers } from './Stopovers'
-import {
-  StyledAccordion,
-  StyledCard,
-  StyledItinerary,
-  StyledWrapperStopovers
-} from './styled'
+import { StyledAccordion, StyledCard, StyledItinerary } from './styled'
 import { TypeOfFlight } from './TypeOfFlight'
 
 type Props = {

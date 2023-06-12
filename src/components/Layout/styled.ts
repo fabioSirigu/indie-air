@@ -4,9 +4,6 @@ export const StyledBody = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
-  background-image: url('./images/marco-lopez-qK6HAkB91Yc-unsplash.jpg');
-  background-size: cover;
-  overflow: hidden;
 `
 
 export const StyledMain = styled.main`
@@ -14,4 +11,6 @@ export const StyledMain = styled.main`
   height: 100vh;
   flex: 1;
   overflow: scroll;
+  background-image: url('./images/marco-lopez-qK6HAkB91Yc-unsplash.jpg');
+  background-size: cover;
 `

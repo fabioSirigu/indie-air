@@ -6,6 +6,7 @@ export const StyledBody = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 1.2rem;
+  overflow: scroll;
 `
 
 export const StyledCard = styled.div`
@@ -44,7 +45,7 @@ export const StyledAccordion = styled.div<PropsAccordion>`
   ${({ extended }) =>
     extended
       ? css`
-          display: block;
+          display: inline;
         `
       : css`
           display: none;
@@ -57,3 +58,4 @@ export const StyledWrapperStopovers = styled.div`
   align-items: center;
   column-gap: 0.75rem;
 `
+export const StyledWrapperStopover = styled.div``

@@ -10,7 +10,7 @@ import { StyledLoader } from '../../style/global'
 import { FlightCard } from './FlightCard'
 import { StyledBody } from './styled'
 
-export const Flights = memo(() => {
+export const Flights = () => {
   const navigate = useNavigate()
 
   const handleNavigate = useCallback(() => {
@@ -23,7 +23,7 @@ export const Flights = memo(() => {
   if (isLoading) return <StyledLoader />
 
   const dataArray = flight.data
-  // console.log(dataArray)
+  console.log(dataArray)
 
   const itineraries = dataArray.map((item: FlightsDto) => item)
   // console.log('itineraries', itineraries)
@@ -43,4 +43,4 @@ export const Flights = memo(() => {
       <Button onClick={handleNavigate} title="Go Back" />
     </StyledBody>
   )
-})
+}

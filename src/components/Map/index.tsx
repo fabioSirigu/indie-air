@@ -5,7 +5,6 @@ import { useGetAirportsQuery } from '../../features/api/endpoints/airportsEndpoi
 import { Airport } from '../../features/api/endpoints/types'
 import { searchActions } from '../../features/search/reducer'
 import { StyledLoader } from '../../style/global'
-import { Loader } from '../Loader'
 import { Text } from '../Text'
 import { StyledMap } from './styled'
 
@@ -17,11 +16,11 @@ type City = {
   lng: number
   country_code: string
 }
-export const MyMap = memo(() => {
+export const MyMap = () => {
   const dispatch = useDispatch()
 
   const [popupInfo, setPopupInfo] = useState<City>()
-  const { data: airports, isLoading, fulfilledTimeStamp } = useGetAirportsQuery()
+  const { data: airports, isLoading } = useGetAirportsQuery()
 
   const filteredAirports = airports?.filter((item) => item.iata_code)
 
@@ -59,6 +58,7 @@ export const MyMap = memo(() => {
     [filteredAirports, handleOpenPopUp]
   )
   if (isLoading) return <StyledLoader />
+
   return (
     <StyledMap>
       <Map
@@ -100,4 +100,4 @@ export const MyMap = memo(() => {
       </Map>
     </StyledMap>
   )
-})
+}

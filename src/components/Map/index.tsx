@@ -1,9 +1,12 @@
+import { Position } from 'geojson'
+import { GeoJSONSourceOptions } from 'mapbox-gl'
 import { memo, useCallback, useMemo, useState } from 'react'
-import Map, { Marker, Popup } from 'react-map-gl'
-import { useDispatch } from 'react-redux'
+import Map, { Layer, Marker, Popup, Source } from 'react-map-gl'
+import { useDispatch, useSelector } from 'react-redux'
 import { useGetAirportsQuery } from '../../features/api/endpoints/airportsEndpoints'
 import { Airport } from '../../features/api/endpoints/types'
 import { searchActions } from '../../features/search/reducer'
+import { searchFlightsOptions } from '../../features/search/selectors'
 import { StyledLoader } from '../../style/global'
 import { Text } from '../Text'
 import { StyledMap } from './styled'
@@ -19,11 +22,25 @@ type City = {
 export const MyMap = () => {
   const dispatch = useDispatch()
 
+  const selectedAirport = useSelector(searchFlightsOptions)
+
   const [popupInfo, setPopupInfo] = useState<City>()
   const { data: airports, isLoading } = useGetAirportsQuery()
 
-  const filteredAirports = airports?.filter((item) => item.iata_code)
+  const [coordinates, setCoordinates] = useState<Position[]>()
 
+  const filteredAirports = airports?.filter((item: Airport) => item.iata_code)
+
+  const geojson: GeoJSONSourceOptions['data'] = {
+    type: 'Feature',
+    geometry: {
+      type: 'LineString',
+      coordinates: coordinates || []
+    },
+    properties: {
+      name: 'polyline'
+    }
+  }
   const handleOpenPopUp = useCallback(
     (e: any, airport: Airport) => {
       e?.originalEvent?.stopPropagation()
@@ -31,9 +48,12 @@ export const MyMap = () => {
       dispatch(
         searchActions.updateAirport({ name: airport.name, iataCode: airport.iata_code })
       )
+
+      // setCoordinates([[airport.lat, airport.lng]])
     },
     [setPopupInfo, dispatch]
   )
+
   const pins = useMemo(
     () =>
       filteredAirports?.map((city, index) => (
@@ -46,7 +66,12 @@ export const MyMap = () => {
           <img
             onMouseEnter={() => setPopupInfo(city)}
             onMouseLeave={() => setPopupInfo(undefined)}
-            src="https://cdn-icons-png.flaticon.com/512/7720/7720736.png"
+            src={
+              city.name === selectedAirport.departureAirport.name ||
+              city.name === selectedAirport.arrivalAirport.name
+                ? 'https://img.icons8.com/?size=512&id=lbptJGvp4inW&format=png'
+                : 'https://cdn-icons-png.flaticon.com/512/7720/7720736.png'
+            }
             style={{
               width: '35px',
               height: '35px'
@@ -55,8 +80,9 @@ export const MyMap = () => {
           />
         </Marker>
       )),
-    [filteredAirports, handleOpenPopUp]
+    [filteredAirports, handleOpenPopUp, selectedAirport]
   )
+
   if (isLoading) return <StyledLoader />
 
   return (
@@ -97,6 +123,21 @@ export const MyMap = () => {
             </div>
           </Popup>
         )}
+        <Source id="polylineLayer" type="geojson" data={geojson}>
+          <Layer
+            id="lineaLayer"
+            type="line"
+            source="data"
+            layout={{
+              'line-join': 'round',
+              'line-cap': 'round'
+            }}
+            paint={{
+              'line-color': 'rgba(3, 170, 238, 0.5)',
+              'line-width': 5
+            }}
+          />
+        </Source>
       </Map>
     </StyledMap>
   )

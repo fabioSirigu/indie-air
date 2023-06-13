@@ -8,9 +8,12 @@ export const searchFlightsOptions = createSelector(
   (flights) => flights.searchFlightsOptions
 )
 
+export const selectedDates = createSelector(searchFlightsOptions, (dates) => {
+  const date = [dates.departureDate, dates.returnDate]
+  return date
+})
 export const selectCanSearch = createSelector(searchFlightsOptions, (searchOptions) =>
   Object.values(searchOptions).every((option) => {
-    if (Array.isArray(option)) return !!option.length
     if (typeof option === 'object' && option !== null) {
       return Object.values(option).some((item) => {
         return !!item

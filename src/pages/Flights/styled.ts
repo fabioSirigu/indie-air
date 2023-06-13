@@ -3,15 +3,22 @@ import styled, { css } from 'styled-components'
 export const StyledBody = styled.div`
   padding: 2rem 0;
   display: flex;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 1.2rem;
   overflow: scroll;
 `
-
+export const StyledWrapperList = styled.div`
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  overflow: scroll;
+`
 export const StyledCard = styled.div`
   padding: 0.75rem 1.25rem;
-  width: 30%;
   border-radius: ${({ theme }) => theme.radii[2]}rem;
   color: ${({ theme }) => theme.colors.background};
   background: ${({ theme }) => theme.colors.text};
@@ -26,6 +33,8 @@ export const StyledItinerary = styled.div`
   gap: 1rem;
   justify-content: space-between;
   position: relative;
+  padding: 1rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 `
 
 export const StyledDepartureInfo = styled.div``
@@ -51,11 +60,23 @@ export const StyledAccordion = styled.div<PropsAccordion>`
           display: none;
         `}
 `
-
 export const StyledWrapperStopovers = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   column-gap: 0.75rem;
+  row-gap: 1rem;
 `
-export const StyledWrapperStopover = styled.div``
+export const StyledWrapperTitleCard = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`
+
+export const StyledDateWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`

@@ -22,6 +22,7 @@ export const DepartureFlight = memo(({ departure }: Props) => {
       <Text color="background" weight="mediumBold" variant="h4">
         Andata
       </Text>
+
       <StyledDepartureInfo>
         {departure.segments[0].departure.iataCode}
       </StyledDepartureInfo>

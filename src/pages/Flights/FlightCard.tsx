@@ -25,6 +25,7 @@ export const FlightCard = memo(({ itineraries }: Props) => {
           expanded={handleExpanded}
           departure={departureFlight}
           returnFlight={returnFlight}
+          dropdown={expanded ? 'minus' : 'plus'}
         />
         <DepartureFlight departure={departureFlight} />
         <ReturnFlight returnFlight={returnFlight} />

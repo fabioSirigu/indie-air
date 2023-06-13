@@ -9,7 +9,7 @@ import { searchActions } from '../../features/search/reducer'
 import { searchFlightsOptions } from '../../features/search/selectors'
 import { StyledLoader } from '../../style/global'
 import { FlightCard } from './FlightCard'
-import { StyledBody } from './styled'
+import { StyledBody, StyledWrapperList } from './styled'
 
 export const Flights = memo(() => {
   const navigate = useNavigate()
@@ -31,17 +31,19 @@ export const Flights = memo(() => {
 
   return (
     <StyledBody>
-      <Text color="text" variant="h1">
+      <Text color="text" variant="h1" weight="bold">
         Lista Voli
       </Text>
-      {!dataArray.length ? (
-        <Text color="text">Nessun volo disponibile</Text>
-      ) : (
-        itineraries.map((item: FlightsDto) => {
-          return <FlightCard key={item.id} itineraries={item.itineraries} />
-        })
-      )}
       <Button onClick={handleNavigate} title="Go Back" />
+      <StyledWrapperList>
+        {!dataArray.length ? (
+          <Text color="text">Nessun volo disponibile</Text>
+        ) : (
+          itineraries.map((item: FlightsDto) => {
+            return <FlightCard key={item.id} itineraries={item.itineraries} />
+          })
+        )}
+      </StyledWrapperList>
     </StyledBody>
   )
 })

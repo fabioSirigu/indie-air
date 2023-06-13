@@ -23,11 +23,20 @@ export const MyMap = () => {
   const dispatch = useDispatch()
 
   const selectedAirport = useSelector(searchFlightsOptions)
+  const coordinates = useMemo(() => {
+    const departure = selectedAirport.departureAirport
+    const arrival = selectedAirport.arrivalAirport
+
+    if (departure.lng && departure.lat && arrival.lng && arrival.lat)
+      return [
+        [departure.lng, departure.lat],
+        [arrival.lng, arrival.lat]
+      ]
+    return []
+  }, [selectedAirport])
 
   const [popupInfo, setPopupInfo] = useState<City>()
   const { data: airports, isLoading } = useGetAirportsQuery()
-
-  const [coordinates, setCoordinates] = useState<Position[]>()
 
   const filteredAirports = airports?.filter((item: Airport) => item.iata_code)
 
@@ -46,10 +55,13 @@ export const MyMap = () => {
       e?.originalEvent?.stopPropagation()
       setPopupInfo(airport)
       dispatch(
-        searchActions.updateAirport({ name: airport.name, iataCode: airport.iata_code })
+        searchActions.updateAirport({
+          name: airport.name,
+          iataCode: airport.iata_code,
+          lat: airport.lat,
+          lng: airport.lng
+        })
       )
-
-      // setCoordinates([[airport.lat, airport.lng]])
     },
     [setPopupInfo, dispatch]
   )
@@ -133,8 +145,8 @@ export const MyMap = () => {
               'line-cap': 'round'
             }}
             paint={{
-              'line-color': 'rgba(3, 170, 238, 0.5)',
-              'line-width': 5
+              'line-color': 'rgb(255, 0, 0)',
+              'line-width': 2
             }}
           />
         </Source>

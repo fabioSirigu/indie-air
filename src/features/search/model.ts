@@ -3,8 +3,8 @@ export type SearchState = {
 }
 
 export type SearchOption = {
-  departureAirport: { name: string; iataCode: string }
-  arrivalAirport: { name: string; iataCode: string }
+  departureAirport: { name: string; iataCode: string; lat: number; lng: number }
+  arrivalAirport: { name: string; iataCode: string; lat: number; lng: number }
   departureDate: string
   returnDate: string
   passengers: number

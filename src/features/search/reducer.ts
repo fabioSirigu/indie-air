@@ -3,8 +3,8 @@ import { SearchOption, SearchState } from './model'
 
 const initialState: SearchState = {
   searchFlightsOptions: {
-    departureAirport: { name: '', iataCode: '' },
-    arrivalAirport: { name: '', iataCode: '' },
+    departureAirport: { name: '', iataCode: '', lat: 0, lng: 0 },
+    arrivalAirport: { name: '', iataCode: '', lat: 0, lng: 0 },
     departureDate: '',
     returnDate: '',
     passengers: 1
@@ -17,7 +17,9 @@ const searchSlice = createSlice({
   reducers: {
     updateAirport: (
       state,
-      { payload }: PayloadAction<{ name: string; iataCode: string }>
+      {
+        payload
+      }: PayloadAction<{ name: string; iataCode: string; lat: number; lng: number }>
     ) => {
       const key = state.searchFlightsOptions.departureAirport.iataCode
         ? 'arrivalAirport'

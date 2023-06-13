@@ -1,5 +1,3 @@
-import { Geometry } from 'geojson'
-
 export type Airport = {
   name: string
   iata_code: string

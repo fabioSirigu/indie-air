@@ -1,8 +1,9 @@
+import { memo } from 'react'
 import { StyledImage } from './styled'
 
 type Props = {
   url: string
 }
-export const Image = ({ url }: Props) => {
+export const Image = memo(({ url }: Props) => {
   return <StyledImage src={url} />
-}
+})

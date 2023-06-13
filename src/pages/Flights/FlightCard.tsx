@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { ItinerariesType } from '../../features/api/endpoints/types'
 import { DepartureFlight } from './DepartureFlight'
 import { ReturnFlight } from './ReturnFlight'
@@ -9,7 +9,7 @@ import { TypeOfFlight } from './TypeOfFlight'
 type Props = {
   itineraries: ItinerariesType[]
 }
-export const FlightCard = ({ itineraries }: Props) => {
+export const FlightCard = memo(({ itineraries }: Props) => {
   const [expanded, setExpanded] = useState(false)
 
   const handleExpanded = useCallback(() => {
@@ -17,7 +17,7 @@ export const FlightCard = ({ itineraries }: Props) => {
   }, [setExpanded, expanded])
 
   const [departureFlight, returnFlight] = itineraries
-  console.log('ingresso in flight card', departureFlight.segments)
+
   return (
     <StyledCard>
       <StyledItinerary>
@@ -35,4 +35,4 @@ export const FlightCard = ({ itineraries }: Props) => {
       </StyledItinerary>
     </StyledCard>
   )
-}
+})

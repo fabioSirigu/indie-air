@@ -1,4 +1,3 @@
-import { Position } from 'geojson'
 import { GeoJSONSourceOptions } from 'mapbox-gl'
 import { memo, useCallback, useMemo, useState } from 'react'
 import Map, { Layer, Marker, Popup, Source } from 'react-map-gl'
@@ -19,7 +18,11 @@ type City = {
   lng: number
   country_code: string
 }
-export const MyMap = () => {
+
+const token =
+  'pk.eyJ1IjoiZmFsY28xMCIsImEiOiJjbGlicmsyY3MwNGhrM2lwNnBwYXFja25yIn0.h84EOmlAodF3KTVmein4qQ'
+
+export const MyMap = memo(() => {
   const dispatch = useDispatch()
 
   const selectedAirport = useSelector(searchFlightsOptions)
@@ -100,7 +103,7 @@ export const MyMap = () => {
   return (
     <StyledMap>
       <Map
-        mapboxAccessToken="pk.eyJ1IjoiZmFsY28xMCIsImEiOiJjbGlicmsyY3MwNGhrM2lwNnBwYXFja25yIn0.h84EOmlAodF3KTVmein4qQ"
+        mapboxAccessToken={token}
         initialViewState={{
           latitude: 39.22245441479327,
           longitude: 9.116767711363078,
@@ -146,11 +149,11 @@ export const MyMap = () => {
             }}
             paint={{
               'line-color': 'rgb(255, 0, 0)',
-              'line-width': 2
+              'line-width': 3
             }}
           />
         </Source>
       </Map>
     </StyledMap>
   )
-}
+})

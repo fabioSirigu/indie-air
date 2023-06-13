@@ -1,10 +1,8 @@
-import { log } from 'console'
 import { DatePicker } from 'antd'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
-import React, { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import { searchActions } from '../../features/search/reducer'
+import React, { memo, useCallback } from 'react'
+import { Text } from '../Text'
 import { StyledDateCard } from './styled'
 
 dayjs.extend(customParseFormat)
@@ -13,36 +11,27 @@ const { RangePicker } = DatePicker
 const dateFormat = 'YYYY-MM-DD'
 
 type Props = {
-  value?: string[] | ''
+  onChange: (value: string[]) => void
 }
-export const Date = () => {
-  const dispatch = useDispatch()
 
+export const Date = memo(({ onChange }: Props) => {
   const handleChange = useCallback(
-    (value: any) => {
+    (value: dayjs.Dayjs[]) => {
+      console.log(value)
       const formattedDates = value
         ? value.map((item: any) => item.format(dateFormat))
-        : ''
-      console.log(formattedDates)
-
-      dispatch(
-        searchActions.updateSearchParams({
-          key: 'departureDate',
-          value: formattedDates[0]
-        })
-      )
-      dispatch(
-        searchActions.updateSearchParams({
-          key: 'returnDate',
-          value: formattedDates[1]
-        })
-      )
+        : ['', '']
+      onChange(formattedDates)
     },
-    [dispatch]
+    [onChange]
   )
   return (
     <StyledDateCard>
-      <RangePicker format={dateFormat} onChange={handleChange} />
+      <Text color="background">Date</Text>
+      <RangePicker
+        format={dateFormat}
+        onChange={(value) => handleChange(value as dayjs.Dayjs[])}
+      />
     </StyledDateCard>
   )
-}
+})

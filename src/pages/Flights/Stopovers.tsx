@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Text } from '../../components/Text'
 import { ItinerariesType, SegmentsType } from '../../features/api/endpoints/types'
 import {
@@ -11,7 +12,7 @@ type Props = {
   departure: ItinerariesType
   returnFlight: ItinerariesType
 }
-export const Stopovers = ({ departure, returnFlight }: Props) => {
+export const Stopovers = memo(({ departure, returnFlight }: Props) => {
   return (
     <>
       {departure.segments.map((item: SegmentsType, i) => {
@@ -36,4 +37,4 @@ export const Stopovers = ({ departure, returnFlight }: Props) => {
       })}
     </>
   )
-}
+})

@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { memo, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useLazyGetFlightsQuery } from '../../features/api/endpoints/flightsEndpoints'
@@ -7,19 +7,18 @@ import { searchFlightsOptions, selectCanSearch } from '../../features/search/sel
 import { Button } from '../Button'
 import { CardInfo } from '../CardInfo'
 import { Date } from '../DateCard'
-import { Logo } from '../Logo'
 import { InputNumber } from '../Select'
 import { StyledFilter } from './styled'
 
-export const FilterRow = () => {
+export const FilterRow = memo(() => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const searchParams = useSelector(searchFlightsOptions)
-  const { departureDate, returnDate, arrivalAirport, departureAirport, passengers } =
-    searchParams
+  const { arrivalAirport, departureAirport, passengers } = searchParams
+
   const canUserSearch = useSelector(selectCanSearch)
-  const [trigger, data] = useLazyGetFlightsQuery()
+  const [trigger] = useLazyGetFlightsQuery()
 
   const searchFlights = useCallback(() => {
     searchParams && trigger(searchParams)
@@ -28,18 +27,33 @@ export const FilterRow = () => {
 
   return (
     <StyledFilter>
-      <Logo />
       <CardInfo
-        label={'Aereporto di Partenza'}
+        label={'Aeroporto di Partenza'}
         value={departureAirport.name}
         onChange={() => dispatch(searchActions.resetAirport('departureAirport'))}
       />
       <CardInfo
-        label={'Aereporto di Arrivo'}
+        label={'Aeroporto di Arrivo'}
         value={arrivalAirport.name}
         onChange={() => dispatch(searchActions.resetAirport('arrivalAirport'))}
       />
-      <Date />
+      <Date
+        onChange={(formattedDates) => {
+          const [startDate, endDate] = formattedDates
+          dispatch(
+            searchActions.updateSearchParams({
+              key: 'departureDate',
+              value: startDate
+            })
+          )
+          dispatch(
+            searchActions.updateSearchParams({
+              key: 'returnDate',
+              value: endDate
+            })
+          )
+        }}
+      />
       <InputNumber
         value={passengers}
         onChange={(value) =>
@@ -59,4 +73,4 @@ export const FilterRow = () => {
       />
     </StyledFilter>
   )
-}
+})

@@ -1,11 +1,11 @@
 import { Empty } from 'antd'
-import React, { useCallback } from 'react'
+import React, { memo, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/Button'
 import { Text } from '../../components/Text'
 import { StyledEmptyPage } from './styled'
 
-export const NotFound = () => {
+export const NotFound = memo(() => {
   const navigate = useNavigate()
   const handleNavigate = useCallback(() => {
     navigate('/')
@@ -19,4 +19,4 @@ export const NotFound = () => {
       <Button background="dangerLight" title="Go Back" onClick={handleNavigate} />
     </StyledEmptyPage>
   )
-}
+})

@@ -1,12 +1,12 @@
 import { Input as InputAntd } from 'antd'
-import React from 'react'
+import React, { memo } from 'react'
 
 type Props = {
   label?: string
   value?: string
   onChange?: (value?: string) => void
 }
-export const Input = ({ label, value, onChange }: Props) => {
+export const Input = memo(({ label, value, onChange }: Props) => {
   return (
     <InputAntd
       value={value}
@@ -15,4 +15,4 @@ export const Input = ({ label, value, onChange }: Props) => {
       onChange={({ target }) => onChange?.(target.value)}
     />
   )
-}
+})

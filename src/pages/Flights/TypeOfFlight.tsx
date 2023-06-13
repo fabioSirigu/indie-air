@@ -1,8 +1,8 @@
+import { memo } from 'react'
 import { IconButton } from '../../components/Button/IconButton'
 import { Icon } from '../../components/Icon'
 import { Text } from '../../components/Text'
 import { ItinerariesType } from '../../features/api/endpoints/types'
-import { DepartureFlight } from './DepartureFlight'
 import { StyledWrapperStopovers } from './styled'
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   returnFlight: ItinerariesType
   expanded: () => void
 }
-export const TypeOfFlight = ({ departure, returnFlight, expanded }: Props) => {
+export const TypeOfFlight = memo(({ departure, returnFlight, expanded }: Props) => {
   return (
     <StyledWrapperStopovers>
       {departure.segments.length > 1 && returnFlight.segments.length > 1 ? (
@@ -32,4 +32,4 @@ export const TypeOfFlight = ({ departure, returnFlight, expanded }: Props) => {
       )}
     </StyledWrapperStopovers>
   )
-}
+})

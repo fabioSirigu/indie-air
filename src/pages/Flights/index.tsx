@@ -1,10 +1,11 @@
 import { memo, useCallback } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/Button'
 import { Text } from '../../components/Text'
 import { useGetFlightsQuery } from '../../features/api/endpoints/flightsEndpoints'
 import { FlightsDto } from '../../features/api/endpoints/types'
+import { searchActions } from '../../features/search/reducer'
 import { searchFlightsOptions } from '../../features/search/selectors'
 import { StyledLoader } from '../../style/global'
 import { FlightCard } from './FlightCard'
@@ -12,10 +13,13 @@ import { StyledBody } from './styled'
 
 export const Flights = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleNavigate = useCallback(() => {
     navigate('/')
-  }, [navigate])
+    dispatch(searchActions.resetAirport('departureAirport'))
+    dispatch(searchActions.resetAirport('arrivalAirport'))
+  }, [navigate, dispatch])
 
   const searchParams = useSelector(searchFlightsOptions)
   const { data: flight, isLoading } = useGetFlightsQuery(searchParams)

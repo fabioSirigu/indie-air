@@ -10,12 +10,22 @@ export const StyledBody = styled.div`
   overflow: scroll;
 `
 export const StyledWrapperList = styled.div`
+  width: 80%;
   padding: 2rem;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1.2rem;
   overflow: scroll;
+`
+
+export const StyledNoData = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: ${({ theme }) => theme.radii[2]}rem;
 `
 export const StyledCard = styled.div`
   padding: 0.75rem 1.25rem;
@@ -26,13 +36,13 @@ export const StyledCard = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
 `
 export const StyledItinerary = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   justify-content: space-between;
-  position: relative;
   padding: 1rem;
   border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 `
@@ -51,10 +61,21 @@ type PropsAccordion = {
   extended: boolean
 }
 export const StyledAccordion = styled.div<PropsAccordion>`
+  transition: 0.4s;
   ${({ extended }) =>
     extended
       ? css`
           display: inline;
+          position: absolute;
+          z-index: 1000;
+          bottom: -40%;
+          left: 0px;
+          width: 100%;
+          background: rgb(240, 240, 240);
+          padding: 0.75rem 1.25rem;
+          border-radius: 0 0 1rem 1rem;
+          border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+          box-shadow: rgba(0, 0, 0, 0.5) 0px 20px 15px 4px;
         `
       : css`
           display: none;

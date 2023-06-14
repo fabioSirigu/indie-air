@@ -1950,14 +1950,7 @@
             "lng": 11.255,
             "country_code": "IT"
         },
-        {
-            "name": "Sigonella Naval Air Station",
-            "iata_code": "NSY",
-            "icao_code": "LICZ",
-            "lat": 37.40346,
-            "lng": 14.919819,
-            "country_code": "IT"
-        },
+        
         {
             "name": "Sotos",
             "icao_code": "LESS",

@@ -16,9 +16,6 @@ export const fligths = fligthsApi.injectEndpoints({
         })
         return { url: version, params: encodedParams }
       }
-      /* transformResponse: (response: { data: any }) => {
-        return response.data
-      } */
     })
   })
 })

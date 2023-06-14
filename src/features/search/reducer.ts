@@ -47,6 +47,12 @@ const searchSlice = createSlice({
         ...state.searchFlightsOptions,
         [payload]: initialState.searchFlightsOptions[payload]
       }
+    },
+    resetDate: (state, { payload }: PayloadAction<'departureDate' | 'returnDate'>) => {
+      state.searchFlightsOptions = {
+        ...state.searchFlightsOptions,
+        [payload]: initialState.searchFlightsOptions[payload]
+      }
     }
   }
 })

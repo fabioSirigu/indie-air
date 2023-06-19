@@ -1,3 +1,5 @@
+import { Collapse } from 'antd'
+import CollapsePanel from 'antd/es/collapse/CollapsePanel'
 import { memo, useCallback, useState } from 'react'
 import { ItinerariesType } from '../../features/api/endpoints/types'
 import { DepartureFlight } from './DepartureFlight'
@@ -21,18 +23,21 @@ export const FlightCard = memo(({ itineraries }: Props) => {
   return (
     <StyledCard>
       <StyledItinerary>
-        <TypeOfFlight
-          expanded={handleExpanded}
-          departure={departureFlight}
-          returnFlight={returnFlight}
-          dropdown={expanded ? 'minus' : 'plus'}
-        />
+        <TypeOfFlight departure={departureFlight} returnFlight={returnFlight} />
         <DepartureFlight departure={departureFlight} />
         <ReturnFlight returnFlight={returnFlight} />
-
-        <StyledAccordion extended={expanded}>
-          <Stopovers departure={departureFlight} returnFlight={returnFlight} />
-        </StyledAccordion>
+        {departureFlight.segments.length > 1 && returnFlight.segments.length > 1 ? (
+          <StyledAccordion
+            collapsible="header"
+            activeKey={expanded ? ['1'] : undefined}
+            ghost
+            onChange={handleExpanded}
+          >
+            <CollapsePanel header="Scali" key="1">
+              <Stopovers departure={departureFlight} returnFlight={returnFlight} />
+            </CollapsePanel>
+          </StyledAccordion>
+        ) : null}
       </StyledItinerary>
     </StyledCard>
   )

@@ -19,9 +19,6 @@ export const ReturnFlight = memo(({ returnFlight }: Props) => {
 
   return (
     <StyledFLightTrack>
-      <Text color="background" weight="mediumBold" variant="h4">
-        Ritorno
-      </Text>
       <StyledDepartureInfo>
         {returnFlight.segments[0].departure.iataCode}
       </StyledDepartureInfo>

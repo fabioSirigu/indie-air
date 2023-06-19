@@ -15,44 +15,33 @@ import {
 type Props = {
   departure: ItinerariesType
   returnFlight: ItinerariesType
-  expanded: () => void
-  dropdown: NameIcon
 }
-export const TypeOfFlight = memo(
-  ({ departure, returnFlight, expanded, dropdown }: Props) => {
-    const date = useSelector(searchFlightsOptions)
-    const { departureDate, returnDate } = date
+export const TypeOfFlight = memo(({ departure, returnFlight }: Props) => {
+  const date = useSelector(searchFlightsOptions)
+  const { departureDate, returnDate } = date
 
-    return (
-      <StyledWrapperStopovers>
-        <StyledDateWrapper>
-          <Text color="textLight" variant="h4">
-            A/R: {`${departureDate} / ${returnDate}`}
+  return (
+    <StyledWrapperStopovers>
+      <StyledDateWrapper>
+        <Text color="textLight" variant="h4">
+          A/R: {`${departureDate} / ${returnDate}`}
+        </Text>
+      </StyledDateWrapper>
+      {departure.segments.length > 1 && returnFlight.segments.length > 1 ? (
+        <StyledWrapperTitleCard>
+          <Text weight="mediumBold" color="dangerLight" variant="h3">
+            Scali: {departure.segments.length - 1}
           </Text>
-        </StyledDateWrapper>
-        {departure.segments.length > 1 && returnFlight.segments.length > 1 ? (
-          <StyledWrapperTitleCard>
-            <Text weight="mediumBold" color="dangerLight" variant="h3">
-              Scali: {departure.segments.length - 1}
-            </Text>
-            <Icon iconName="arrival" color="dangerLight" />
-
-            <IconButton
-              background="primary"
-              onClick={expanded}
-              iconName={dropdown}
-              rounded
-            />
-          </StyledWrapperTitleCard>
-        ) : (
-          <>
-            <Text weight="mediumBold" variant="h3" color="confirm">
-              Diretto
-            </Text>
-            <Icon iconName="plane" color="confirm" />
-          </>
-        )}
-      </StyledWrapperStopovers>
-    )
-  }
-)
+          <Icon iconName="arrival" color="dangerLight" />
+        </StyledWrapperTitleCard>
+      ) : (
+        <>
+          <Text weight="mediumBold" variant="h3" color="confirm">
+            Diretto
+          </Text>
+          <Icon iconName="plane" color="confirm" />
+        </>
+      )}
+    </StyledWrapperStopovers>
+  )
+})

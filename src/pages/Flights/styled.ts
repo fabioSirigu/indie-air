@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components'
+import { Collapse } from 'antd'
+import styled from 'styled-components'
 
 export const StyledBody = styled.div`
   padding: 2rem 0;
@@ -13,7 +14,8 @@ export const StyledWrapperList = styled.div`
   width: 80%;
   padding: 2rem;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
   flex-wrap: wrap;
   gap: 1.2rem;
   overflow: scroll;
@@ -28,6 +30,8 @@ export const StyledNoData = styled.div`
   border-radius: ${({ theme }) => theme.radii[2]}rem;
 `
 export const StyledCard = styled.div`
+  width: 60%;
+  height: max-content;
   padding: 0.75rem 1.25rem;
   border-radius: ${({ theme }) => theme.radii[2]}rem;
   color: ${({ theme }) => theme.colors.background};
@@ -40,6 +44,7 @@ export const StyledCard = styled.div`
 `
 export const StyledItinerary = styled.div`
   display: flex;
+  width: 90%;
   flex-direction: column;
   gap: 1rem;
   justify-content: space-between;
@@ -47,42 +52,29 @@ export const StyledItinerary = styled.div`
   border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 `
 
-export const StyledDepartureInfo = styled.div``
-export const StyledTimeInfo = styled.div``
-export const StyledArrivalInfo = styled.div``
+export const StyledDepartureInfo = styled.div`
+  color: ${({ theme }) => theme.colors.confirm};
+`
+export const StyledTimeInfo = styled.div`
+  color: ${({ theme }) => theme.colors.background};
+`
+export const StyledArrivalInfo = styled.div`
+  color: ${({ theme }) => theme.colors.confirm};
+`
 
 export const StyledFLightTrack = styled.div`
   display: flex;
-  justify-content: space-between;
-  column-gap: 1.5rem;
+  justify-content: space-around;
+  column-gap: 1rem;
 `
 
-type PropsAccordion = {
-  extended: boolean
-}
-export const StyledAccordion = styled.div<PropsAccordion>`
-  transition: 0.4s;
-  ${({ extended }) =>
-    extended
-      ? css`
-          display: inline;
-          position: absolute;
-          z-index: 1000;
-          bottom: -40%;
-          left: 0px;
-          width: 100%;
-          background: rgb(240, 240, 240);
-          padding: 0.75rem 1.25rem;
-          border-radius: 0 0 1rem 1rem;
-          border-bottom: 2px solid rgba(0, 0, 0, 0.5);
-          box-shadow: rgba(0, 0, 0, 0.5) 0px 20px 15px 4px;
-        `
-      : css`
-          display: none;
-        `}
+export const StyledAccordion = styled(Collapse)`
+  width: 100%;
+  padding: 0px;
 `
 export const StyledWrapperStopovers = styled.div`
   display: flex;
+  padding: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -92,7 +84,7 @@ export const StyledWrapperStopovers = styled.div`
 export const StyledWrapperTitleCard = styled.div`
   display: flex;
   gap: 1rem;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
 `

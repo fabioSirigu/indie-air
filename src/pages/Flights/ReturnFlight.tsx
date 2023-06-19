@@ -1,5 +1,4 @@
 import { memo, useMemo } from 'react'
-import { Text } from '../../components/Text'
 import { ItinerariesType } from '../../features/api/endpoints/types'
 import {
   StyledDepartureInfo,

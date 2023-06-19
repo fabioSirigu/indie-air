@@ -1,4 +1,3 @@
-import { Collapse } from 'antd'
 import CollapsePanel from 'antd/es/collapse/CollapsePanel'
 import { memo, useCallback, useState } from 'react'
 import { ItinerariesType } from '../../features/api/endpoints/types'
